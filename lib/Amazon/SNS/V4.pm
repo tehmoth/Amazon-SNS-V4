@@ -322,7 +322,7 @@ Amazon::SNS::V4 - Amazon Simple Notification Service with v4 Signatures
 
   $sns->service('http://sns.us-east-1.amazonaws.com');
 
-=head1 DESCRIPTIN
+=head1 DESCRIPTION
 
 Amazon::SNS::V4 is basically L<Amazon::SNS> v1.3, changed to use v4 Signatures, from
 L<< AWS::Signature4 >>.
