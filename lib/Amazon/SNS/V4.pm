@@ -143,10 +143,11 @@ sub dispatch
 				'ForceArray' => [ qw/ Topics member / ],
 		);
 	} else {
+		my $response_content = $response->content;
 		$self->error_response( $response_content );
 		$self->error(
-			($response->content =~ /^<.+>/)
-				? eval { XMLin($response->content)->{'Error'}{'Message'} || $response->status_line }
+			($response_content =~ /^<.+>/)
+				? eval { XMLin($response_content)->{'Error'}{'Message'} || $response->status_line }
 				: $response->status_line
 		);
 	}
