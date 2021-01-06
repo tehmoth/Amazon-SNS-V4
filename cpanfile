@@ -4,3 +4,5 @@ requires 'HTTP::Request::Common';
 requires 'AWS::Signature4';
 requires 'JSON';
 requires 'XML::Simple';
+requires 'LWP::UserAgent';
+requires 'URI::Escape';
