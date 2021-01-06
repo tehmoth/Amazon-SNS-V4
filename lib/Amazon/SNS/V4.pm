@@ -131,7 +131,7 @@ sub dispatch
 
 	my $post = POST $self->service, [%$args];
 	$signer->sign( $post );
-	
+
 	my $response = LWP::UserAgent->new->request( $post );
 
 	$self->status_code($response->code);
@@ -225,23 +225,25 @@ Sorry for not providing a better documentation, patches are always accepted. ;)
 
 =item Amazon::SNS::V4->new({ 'key' => '...', 'secret' => '...' })
 
-	Creates an Amazon::SNS::V4 object with given key and secret.
+Creates an Amazon::SNS::V4 object with given key and secret.
 
 =item $sns->GetTopic($arn)
 
-	Gives you an Amazon::SNS::V4::Topic object using an existing ARN.
+Gives you an Amazon::SNS::V4::Topic object using an existing ARN.
 
 =item $sns->GetTarget($arn)
 
-	Gives you an Amazon::SNS::V4::Target object using an existing ARN. Sending Notification to TargetArn instead of TopicArn.
+Gives you an Amazon::SNS::V4::Target object using an existing ARN. Sending Notification to TargetArn instead of TopicArn.
 
 =item $target_or_topic->Publish($message, $subject, $attributes, $args) (Amazon::SNS::V4::Target, Amazon::SNS::V4::Topic)
 
-	When used with Amazon::SNS::V4::Target or Amazon::SNS::V4::Topic object (see GetTarget or GetTopic), additional parameter $attributes is used to pass
-	MessageAttributes.entry.N attributes with message.
-	An example of MobilePush TTL: $attributes = {"AWS.SNS.MOBILE.APNS.TTL" => {"Type" => "String", "Value" => 3600}};
-	More information can be found on Amazon web site: http://docs.aws.amazon.com/sns/latest/dg/sns-ttl.html
-	$args will be passed as additional request parameters to L<< Amazon SNS Publish API|https://docs.aws.amazon.com/sns/latest/api/API_Publish.html >>.
+When used with Amazon::SNS::V4::Target or Amazon::SNS::V4::Topic object (see GetTarget or GetTopic), additional parameter C<$attributes> is used to pass
+MessageAttributes.entry.N attributes with message.
+
+An example of MobilePush TTL: C<$attributes = {"AWS.SNS.MOBILE.APNS.TTL" =E<gt> {"Type" =E<gt> "String", "Value" =E<gt> 3600}};>
+More information can be found on Amazon web site: http://docs.aws.amazon.com/sns/latest/dg/sns-ttl.html
+
+C<$args> will be passed as additional request parameters to L<< Amazon SNS Publish API|https://docs.aws.amazon.com/sns/latest/api/API_Publish.html >>.
 
 	my $topic = $sns->GetTopic('arn:aws:sns:eu-west-1:123456789099:MyTopic');
 	$topic->Publish(
@@ -253,24 +255,24 @@ Sorry for not providing a better documentation, patches are always accepted. ;)
 
 =item $sns->CreateTopic($name)
 
-	Gives you an Amazon::SNS::V4::Topic object with the given name, creating it 
-	if it does not already exist in your Amazon SNS account.
+Gives you an Amazon::SNS::V4::Topic object with the given name, creating it
+if it does not already exist in your Amazon SNS account.
 
 =item $sns->DeleteTopic($arn)
 
-	Deletes a topic using its ARN.
+Deletes a topic using its ARN.
 
 =item $sns->ListTopics
 
-	The result is a list of all the topics in your account, as an array of Amazon::SNS::V4::Topic objects.
+The result is a list of all the topics in your account, as an array of Amazon::SNS::V4::Topic objects.
 
 =item $sns->error
 
-	Description of the last error, or undef if none.
+Description of the last error, or undef if none.
 
 =item $sns->status_code
 
-	The status code of the last HTTP response.
+The status code of the last HTTP response.
 
 =back
 
@@ -282,25 +284,25 @@ Sorry for not providing a better documentation, patches are always accepted. ;)
 
 =item $sns->service($service_url)
 
-	Get/set SNS service url, something like 'http://sns.us-east-1.amazonaws.com'.
+Get/set SNS service url, something like 'http://sns.us-east-1.amazonaws.com'.
 
 =item $sns->key
 
 =item $sns->key('...')
 
-	Get/set auth key.
+Get/set auth key.
 
 =item $sns->secret
 
 =item $sns->secret('...')
 
-	Get/set secret.
+Get/set secret.
 
 =item $sns->debug
 
 =item $sns->debug(1)
 
-	Get/set debug level. When set to 1 you'll get some debug output on STDERR.
+Get/set debug level. When set to 1 you'll get some debug output on STDERR.
 
 =back
 
