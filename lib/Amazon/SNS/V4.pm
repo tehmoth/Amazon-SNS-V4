@@ -235,9 +235,9 @@ Sorry for not providing a better documentation, patches are always accepted. ;)
 
 	Gives you an Amazon::SNS::V4::Target object using an existing ARN. Sending Notification to TargetArn instead of TopicArn.
 
-=item $sns->Publish($message, $subject, $attributes) (Amazon::SNS::V4::Target)
+=item $target_or_topic->Publish($message, $subject, $attributes) (Amazon::SNS::V4::Target, Amazon::SNS::V4::Topic)
 
-	When used with Amazon::SNS::V4::Target object (see GetTarget), additional parameter $attributes is used to pass 
+	When used with Amazon::SNS::V4::Target or Amazon::SNS::V4::Topic object (see GetTarget or GetTopic), additional parameter $attributes is used to pass
 	MessageAttributes.entry.N attributes with message.
 	An example of MobilePush TTL: $attributes = {"AWS.SNS.MOBILE.APNS.TTL" => {"Type" => "String", "Value" => 3600}};
 	More information can be found on Amazon web site: http://docs.aws.amazon.com/sns/latest/dg/sns-ttl.html
