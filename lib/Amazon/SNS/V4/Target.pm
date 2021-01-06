@@ -12,7 +12,7 @@ __PACKAGE__->mk_accessors(qw/ sns arn /);
 
 sub Publish
 {
-	my ($self, $msg, $subj, $attr) = @_;
+	my ($self, $msg, $subj, $attr, $args) = @_;
 
 	# XXX croak on invalid arn
 
@@ -52,6 +52,7 @@ sub Publish
 		'MessageStructure'	=> $structure,
 		'Subject'		=> $subj,
 		'Attributes'		=> $attributes,
+		%{$args || {}},
 	});
 
 	# return message id on success, undef on error
