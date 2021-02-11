@@ -1,20 +1,20 @@
-package Amazon::SNS::V4::Target;
+package Amazon::SNS::V4::FifoTopic;
 
 use strict;
 use warnings;
 
 our $VERSION = '1.11';
-use base qw(Class::Accessor);
+use base qw(Amazon::SNS::V4::Topic);
 
 use JSON;
 
-__PACKAGE__->mk_accessors(qw/ sns arn /);
-
+# add messagegroupid and deduplicationid for FIFO
 sub Publish
 {
-	my ($self, $msg, $subj, $attr) = @_;
+	my ($self, $msg, $subj, $groupid, $dedupeid, $attr) = @_;
 
 	# XXX croak on invalid arn
+	# XXX croak on missing groupid, dedupeid
 
 	my $structure = undef;
 	my $attributes = undef;
@@ -47,10 +47,12 @@ sub Publish
 
 	my $r = $self->sns->dispatch({
 		'Action'		=> 'Publish',
-		'TargetArn'		=> $self->arn,
+		'TopicArn'		=> $self->arn,
 		'Message'		=> $msg,
 		'MessageStructure'	=> $structure,
 		'Subject'		=> $subj,
+		'MessageGroupId'    => $groupid,
+		'MessageDeduplicationId' => $dedupeid,
 		'Attributes'		=> $attributes,
 	});
 
@@ -59,3 +61,4 @@ sub Publish
 }
 
 1;
+

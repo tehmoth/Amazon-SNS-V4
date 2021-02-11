@@ -3,7 +3,7 @@ package Amazon::SNS::V4::Topic;
 use strict;
 use warnings;
 
-our $VERSION = '1.10';
+our $VERSION = '1.11';
 use base qw(Class::Accessor);
 
 use JSON;
