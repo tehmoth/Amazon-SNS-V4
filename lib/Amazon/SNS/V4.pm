@@ -15,7 +15,7 @@ use HTTP::Request::Common;
 use Amazon::SNS::V4::Target;
 use Amazon::SNS::V4::Topic;
 
-our $VERSION = '1.9';
+our $VERSION = '1.10';
 
 
 sub CreateTopic
@@ -143,7 +143,7 @@ sub dispatch
 				'ForceArray' => [ qw/ Topics member / ],
 		);
 	} else {
-		$self->error_response( $response_content );
+		$self->error_response( $response->content );
 		$self->error(
 			($response->content =~ /^<.+>/)
 				? eval { XMLin($response->content)->{'Error'}{'Message'} || $response->status_line }
@@ -237,8 +237,7 @@ Sorry for not providing a better documentation, patches are always accepted. ;)
 
 =item $sns->Publish($message, $subject, $attributes) (Amazon::SNS::V4::Target)
 
-	When used with Amazon::SNS::V4::Target object (see GetTarget), additional parameter $attributes is used to pass 
-	MessageAttributes.entry.N attributes with message.
+	Additional parameter $attributes is used to pass MessageAttributes.entry.N attributes with message.
 	An example of MobilePush TTL: $attributes = {"AWS.SNS.MOBILE.APNS.TTL" => {"Type" => "String", "Value" => 3600}};
 	More information can be found on Amazon web site: http://docs.aws.amazon.com/sns/latest/dg/sns-ttl.html
 

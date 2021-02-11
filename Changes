@@ -1,5 +1,9 @@
 Revision history for perl module Amazon::SNS::V4
 
+1.10 2021-02-11
+   - Fix broken release
+   - Add attribute support for Topic->Publish
+
 1.9 2020-12-18
    - Actually move ::Target and ::Topic into separate
      files
